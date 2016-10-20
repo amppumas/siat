@@ -2,6 +2,7 @@
 [![Estado del Proyecto](https://img.shields.io/badge/status-developing-red.svg)]()
 
 Checklist del proyecto
+- [ ] Configurar nuestros locales
 - [ ] Interfaz para el usuario (Responsive)
 - [ ] Fake API para SAJU y SIVEB
 - [ ] Mostrar lista de los juegos y lugares disponibles con horario
