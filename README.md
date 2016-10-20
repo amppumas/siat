@@ -1,6 +1,5 @@
 # Sistema de Asignación de Turnos
-https://img.shields.io/badge/status-developing-red.svg
-
+[![Estado del Proyecto](https://img.shields.io/badge/status-developing-red.svg)]()
 Checklist del proyecto
 - [ ] Interfaz para el usuario (Responsive)
 - [ ] Fake API para SAJU y SIVEB
