@@ -1,5 +1,6 @@
 # Sistema de Asignación de Turnos
 [![Estado del Proyecto](https://img.shields.io/badge/status-developing-red.svg)]()
+
 Checklist del proyecto
 - [ ] Interfaz para el usuario (Responsive)
 - [ ] Fake API para SAJU y SIVEB
@@ -9,7 +10,3 @@ Checklist del proyecto
 - [ ] Notificar al SAJU la asignación de lugares
 - [ ] Cancelar/Modificar las reservaciones
 - [ ] Concectarnos a la verdadera API de los otros sistemas
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
