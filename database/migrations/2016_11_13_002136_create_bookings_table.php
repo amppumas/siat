@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->integer('id_boleto');
             $table->integer('id_juego');
             $table->integer('id_hora');
+            $table->integer('active');
             $table->timestamps();
         });
     }

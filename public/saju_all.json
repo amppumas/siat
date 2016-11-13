@@ -6,7 +6,7 @@
 			"status":"disponible",
 			"agelimit":"18",
 			"horarios":[
-				{"id":"1","datetime":"2016-11-13T19:19:30.45-06:00","places":"3"},
+				{"id":"1","datetime":"2016-11-13T04:50:30.45-06:00","places":"3"},
 				{"id":"2","datetime":"2016-11-13T19:25:30.45-06:00","places":"10"},
 				{"id":"3","datetime":"2016-11-13T19:30:30.45-06:00","places":"0"},
 				{"id":"4","datetime":"2016-11-13T19:35:30.45-06:00","places":"1"},
@@ -41,7 +41,7 @@
 		},
 		{
 			"id":"4",
-			"name":"Kilahuea",
+			"name":"Tacitas",
 			"status":"disponible",
 			"agelimit":"21",
 			"horarios":[

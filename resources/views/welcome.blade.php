@@ -7,6 +7,12 @@
           <strong>Lo sentimos :c </strong> {{ $error }}
         </div>
     @endif
+    @if(session('success'))
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Exito</strong> {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-6 col-xs-12">
             <h1>Juegos Disponibles</h1>

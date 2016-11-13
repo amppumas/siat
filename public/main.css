@@ -1,13 +1,13 @@
 .container{
 	font-family: 'Muli', sans-serif;
 }
-.name{
+.celljuego .juego .name{
 	font-size: 7vh;
 }
 .tablehead{
 	font-size: 2.5vh;
 }
-.age{
+.celljuego .juego .age{
 	font-size: 2vh;
 }
 .celljuego:hover,.horario:hover{
@@ -19,4 +19,7 @@ input[type=number]::-webkit-outer-spin-button {
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
+}
+.selected{
+	color:green;
 }
