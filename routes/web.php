@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@show');
+Route::get('/juegos', 'HomeController@horarios');
+Route::get('/reservar', 'HomeController@reservar');

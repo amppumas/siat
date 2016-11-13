@@ -1,0 +1,29 @@
+{	
+	"data":[
+		{
+			"boleto":"1",
+			"name":"Norman Morales",
+			"email":"norman@gmail.com",
+			"birthday":"1995-12-24T19:19:30.45-05:00",
+			"address":"Av. Universidad 3000",
+			"fecha":"2016-11-13T19:19:30.45-06:00",
+			"edad":"19"
+		},
+		{
+			"boleto":"2",
+			"name":"Mauro Caballero",
+			"email":"mauro@gmail.com",
+			"birthday":"1990-12-24T19:19:30.45-05:00",
+			"address":"Av. Universidad 3000",
+			"fecha":"2016-11-13T19:19:30.45-06:00",
+			"edad":"19"
+		},
+		{
+			"boleto":"3",
+			"name":"David Cruz",
+			"edad":"19",
+			"fecha":"2016-11-13T19:19:30.45-06:00",
+			"buyedby":"2"
+		}
+	]
+}

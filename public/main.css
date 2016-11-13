@@ -1,0 +1,22 @@
+.container{
+	font-family: 'Muli', sans-serif;
+}
+.name{
+	font-size: 7vh;
+}
+.tablehead{
+	font-size: 2.5vh;
+}
+.age{
+	font-size: 2vh;
+}
+.celljuego:hover,.horario:hover{
+	cursor: pointer;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
