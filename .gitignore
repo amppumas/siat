@@ -3,7 +3,8 @@ node_modules/
 
 # Laravel 4 specific
 bootstrap/compiled.php
-app/storage/
+storage/app/*.php
+storage/framework/*/*.php
 
 # Laravel 5 & Lumen specific
 bootstrap/cache/
