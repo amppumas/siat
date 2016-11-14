@@ -7,11 +7,17 @@ use App\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
+use Bugsnag;
 
 const SIVEB = "siveb_all.json";
 const SAJU = "saju_all.json";
 class HomeController extends Controller
 {
+    public function error(){
+        Bugsnag::notifyError('ErrorType', 'Test Error');
+        return NULL;
+        
+    }
     public function show(){
 		$juegos = json_decode(file_get_contents(SAJU));
 		foreach($juegos->data as $item)

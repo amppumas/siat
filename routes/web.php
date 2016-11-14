@@ -19,4 +19,5 @@ Route::post('/reservar', 'BookingController@create');
 Route::get('/getreserva', 'BookingController@show');
 Route::get('/cancelar', 'BookingController@destroy');
 Route::get('/update', 'BookingController@update');
+Route::get('/bugsnag', 'HomeController@error');
 Route::post('/verificar', 'HomeController@fake');
