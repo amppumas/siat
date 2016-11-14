@@ -6,6 +6,12 @@ if (isset($url["host"])) {
     $password = $url["pass"];
     $database = substr($url["path"], 1);
 }
+else{
+    $host = '';
+    $username = '';
+    $password = '';
+    $database = '';
+}
 
 return [
 

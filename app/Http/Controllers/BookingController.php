@@ -13,6 +13,9 @@ const SAJUver = 'http://siat.local/verificar';
 const SAJU2 = "saju_all.json";
 class BookingController extends Controller
 {
+    Request::setTrustedHeaderName(Request::HEADER_FORWARDED, null);
+
+    $response = $kernel->handle($request);
     /**
      * Display a listing of the resource.
      *

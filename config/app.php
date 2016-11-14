@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -164,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        'Fideloper\Proxy\TrustedProxyServiceProvider',
         /*
          * Package Service Providers...
          */
