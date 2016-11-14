@@ -90,6 +90,9 @@ class BookingController extends Controller
         $saidname = preg_replace('/\s+/', '', $saidname);
         $saidname = strtolower($saidname);
         $book = Booking::where('id',$id)->get()->first();
+        if(!isset($book)){
+            return view("bookinfo")->with("error","El boleto no existe");
+        }
         $boleto = HomeController::getPersona($book->id_boleto);
         $realname = preg_replace('/\s+/', '', $boleto->name);
         $realname = strtolower($realname);
