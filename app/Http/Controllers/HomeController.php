@@ -14,7 +14,6 @@ const SAJU = "saju_all.json";
 class HomeController extends Controller
 {
     public function error(){
-        Bugsnag::notifyError('ErrorType', 'Test Error');
         return NULL;
         
     }
