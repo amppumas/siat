@@ -9,19 +9,12 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Input;
 use GuzzleHttp\Client;
 
+//Este controlador se encarga de las reservaciones
+
 const SAJUver = 'http://siat.local/verificar';
 const SAJU2 = "saju_all.json";
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -67,17 +60,6 @@ class BookingController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -109,17 +91,6 @@ class BookingController extends Controller
         
         return view("bookinfo")->with("book_id",$book)->with("juego",$juego)->with("horario",$horario)->with("persona",$boleto);
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -156,7 +127,7 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id='')
+    public function destroy()
     {
         $id = Input::get('book');
         $book = Booking::where('id',$id)->get()->first();

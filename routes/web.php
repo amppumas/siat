@@ -19,5 +19,10 @@ Route::post('/reservar', 'BookingController@create');
 Route::get('/getreserva', 'BookingController@show');
 Route::get('/cancelar', 'BookingController@destroy');
 Route::get('/update', 'BookingController@update');
-Route::get('/bugsnag', 'HomeController@error');
 Route::post('/verificar', 'HomeController@fake');
+Route::group(array('prefix' => 'api/v1'), function()
+{
+    Route::get('game/{id}', 'api\ApiBookingController@showbygame');
+	Route::get('booking/{id}', 'api\ApiBookingController@showbyid');
+	Route::get('booking', 'api\ApiBookingController@all');
+});
