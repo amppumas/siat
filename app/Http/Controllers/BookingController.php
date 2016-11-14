@@ -53,6 +53,7 @@ class BookingController extends Controller
         $reserva->id_juego=$id_juego;
         $reserva->id_hora=$id_hora;
         $reserva->id_boleto=$id_boleto;
+        $reserva->active=1;
         $reserva->save();
 
         $juego = HomeController::getJuego($id_juego); 
