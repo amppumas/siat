@@ -13,10 +13,7 @@ const SIVEB = "siveb_all.json";
 const SAJU = "saju_all.json";
 class HomeController extends Controller
 {
-    Request::setTrustedHeaderName(Request::HEADER_FORWARDED, null);
 
-    $response = $kernel->handle($request);
-    
     public function error(){
         return NULL;
         
