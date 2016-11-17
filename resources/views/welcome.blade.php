@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-6 col-xs-12">
             <h1>Juegos Disponibles</h1>
-            <table class="table table-striped juegos">
+            <table class="table juegos">
                 <thead>
                     <tr>
                         <th class="tablehead">Selecciona uno de la lista</th>
@@ -46,7 +46,7 @@
             <div class="input-group hidden" id="reservar">
                 <input type="number" class="form-control"  placeholder="# Boleto" id="id_boleto">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" id="irareserva" type="button">¡Reserva Ahora!</button>
+                    <button class="btn btn-success" id="irareserva" type="button">¡Reserva Ahora!</button>
                 </span>
             </div><!-- /input-group -->
         </div>
@@ -61,6 +61,8 @@
         });
     });
     $( ".celljuego" ).click(function() {
+        $( ".celljuego" ).removeClass('selected');
+        jQuery(this).addClass('selected');
         $.get('/juegos', { id: jQuery(this).data("id")}, function(data) {
                 $("#juegoinfo").replaceWith(data);
         });

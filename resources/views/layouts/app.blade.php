@@ -7,7 +7,7 @@
 
         <title>Asignación de Turnos</title>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://bootswatch.com/spacelab/bootstrap.min.css" crossorigin="anonymous">
         <!-- JQuery ain't nobody got time for vanilla JS-->
         <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
         <!-- Latest compiled and minified JavaScript -->
@@ -18,7 +18,7 @@
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
