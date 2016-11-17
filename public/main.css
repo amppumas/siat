@@ -7,9 +7,6 @@
 .tablehead{
 	font-size: 2.5vh;
 }
-.juegos .selected{
-	background-color: #70d5e2;
-}
 .celljuego .juego .age{
 	font-size: 2vh;
 }
@@ -17,7 +14,7 @@
 	cursor: pointer;
 }
 input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-but#9c27b0ton { 
+input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -25,4 +22,13 @@ input[type=number]::-webkit-outer-spin-but#9c27b0ton {
 }
 #juegoinfo .selected{
 	color:green;
+}
+.juegos .selected{
+	background-color: #390642;
+}
+.selected .name,.selected .age{
+	color: #ffffff;
+}
+.iconito{
+	max-height: 6vh; 
 }

@@ -28,7 +28,7 @@
                             <tr>
                                 <th class="celljuego" data-id="{{ $juego->id }}">
                                     <div class="juego">
-                                        <p class="name">{{ $juego->name }}</p>
+                                        <p class="name">{{ $juego->name }}<img class="iconito" src="icons/roller-coaster.svg"></p>
                                         <p class="age">Edad mínima: {{ $juego->agelimit }}</p>
                                     </div>
                                 </th>
