@@ -26,7 +26,7 @@
                     @foreach($juegos as $key=>$juego)
                         @if($juego->status == "disponible")
                             <tr>
-                                <th class="celljuego" data-id="{{ $juego->id }}">
+                                <th class="celljuego @if($juego==$juegodisp) selected @endif" data-id="{{ $juego->id }}">
                                     <div class="juego">
                                         <p class="name">{{ $juego->name }}<img class="iconito" src="icons/roller-coaster.svg"></p>
                                         <p class="age">Edad mínima: {{ $juego->agelimit }}</p>
@@ -46,7 +46,7 @@
             <div class="input-group hidden" id="reservar">
                 <input type="number" class="form-control"  placeholder="# Boleto" id="id_boleto">
                 <span class="input-group-btn">
-                    <button class="btn btn-success" id="irareserva" type="button">¡Reserva Ahora!</button>
+                    <button class="btn btn-success" id="irareserva" type="button" disabled>¡Reserva Ahora!</button>
                 </span>
             </div><!-- /input-group -->
         </div>
@@ -63,11 +63,19 @@
     });
     @endif
     $( ".celljuego" ).click(function() {
+        var id_juego = jQuery(this).data("id");
         $( ".celljuego" ).removeClass('selected');
         jQuery(this).addClass('selected');
-        $.get('/juegos', { id: jQuery(this).data("id")}, function(data) {
+        $.get('/juegos', { id: id_juego }, function(data) {
                 $("#juegoinfo").replaceWith(data);
         });
+    });
+    $( "#id_boleto" ).on('input', function() {
+        if(jQuery(this).val() != ''){
+            $( "#irareserva" ).prop('disabled', false);
+        }else{
+            $( "#irareserva" ).prop('disabled', true);
+        }
     });
     function show_button() {
         $("#reservar").removeClass("hidden");
