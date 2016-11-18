@@ -26,6 +26,7 @@ class BookingController extends Controller
         $id_juego = $request->input('id_juego');
         $id_hora = $request->input('id_hora');
         $id_boleto = $request->input('id_persona');
+
         /*$client = new Client();
         $res = $client->request('POST', SAJU, [
             'form_params' => [
@@ -37,6 +38,7 @@ class BookingController extends Controller
         ]);
         $result= $res->getBody();
         dd($result);*/
+
         $result=true;
         if(!$result){
             return back()->with("error","Ha ocurrido un error intentalo de nuevo o prueba otro horario");
@@ -68,6 +70,9 @@ class BookingController extends Controller
     public function show($id='')
     {
         $id = Input::get('book');
+        if ($id == '') {
+          return view("bookinfo")->with("error","Ingrese el numero de boleto");
+        }
         $saidname = Input::get('name');
         $saidname = preg_replace('/\s+/', '', $saidname);
         $saidname = strtolower($saidname);
@@ -81,12 +86,14 @@ class BookingController extends Controller
         if($saidname != $realname){
             return view("bookinfo")->with("error","El nombre no es correcto");
         }
-        if ($book->active == "0") {
-            return view("bookinfo")->with("error","Esa reservación ya no esta activa");
-        }
+
         $juego = HomeController::getJuego($book->id_juego); 
 
         $horario = HomeController::getHorario($juego,$book->id_hora);
+
+        if ($book->active == "0") {
+            return view("bookinfo")->with("error","Esa reservación ya no esta activa");
+        }
         
         
         return view("bookinfo")->with("book_id",$book)->with("juego",$juego)->with("horario",$horario)->with("persona",$boleto);

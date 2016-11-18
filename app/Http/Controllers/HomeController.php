@@ -7,7 +7,6 @@ use App\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
-use Bugsnag;
 
 // Este controlador se encarga de las pantallas y la conexion con la API
 const SIVEB = "siveb_all.json";
@@ -18,15 +17,7 @@ class HomeController extends Controller
         Regresa todos los juegos
     */
     public function show(){
-		$juegos = json_decode(file_get_contents(SAJU));
-		foreach($juegos->data as $item)
-		{
-		    if($item->status == "disponible")
-		    {
-		    	return view('welcome')->with("juegos",$juegos->data)->with("juego",$item);
-		    }
-		}
-		return view('welcome')->with("juegos",$juegos->data);
+		return HomeController::returnMessage();
     	
     }
 
@@ -35,6 +26,7 @@ class HomeController extends Controller
     */
     public function horarios(){
     	$juego = HomeController::getJuego(Input::get("id"));
+
     	return view("info")->with("juego",$juego)->with("notitle",Input::get("nm"));
     }
 
@@ -52,6 +44,7 @@ class HomeController extends Controller
     	        return $item;
     	    }
     	}
+
     	return NULL;
     }
 
@@ -69,6 +62,7 @@ class HomeController extends Controller
     	    	return $item;
     	    }
     	}
+
     	return NULL;
     }
 
@@ -84,6 +78,7 @@ class HomeController extends Controller
     	        return $item;
     	    }
     	}
+
     	return NULL;
     }
 
@@ -93,6 +88,7 @@ class HomeController extends Controller
     public static function getPersona($id_boleto)
     {
     	$personas = json_decode(file_get_contents(SIVEB));
+
     	foreach($personas->data as $item)
     	{
     	    if($item->boleto == $id_boleto)
@@ -100,7 +96,38 @@ class HomeController extends Controller
     	        return $item;
     	    }
     	}
+
     	return NULL;
+    }
+
+    /*
+        Regresa un mensaje de error y los juegos disponibles
+    */
+    public function returnMessage($errormsg='')
+    {
+        $juegos = json_decode(file_get_contents(SAJU));
+        $juegodisp = HomeController::getJuegoDisponible();
+
+        if(!isset($juegodisp)){
+            return view('welcome')->with("juegos",$juegos->data)->with("juegodisp",$juegodisp)
+                                  ->with("error",$errormsg);
+        }
+
+        return view("welcome")->with("juegos",$juegos->data)
+                              ->with("error",$errormsg);
+    }
+
+    public function isToday($date)
+    {
+        $today = new DateTime();
+        $datetocompare  = new DateTime($date);
+        $diff = $today->setTime(0,0,0)->diff( $datetocompare->setTime(0,0,0) );
+        $diffDays = (integer)$diff->format( "%R%a" );
+
+        if($diffDays != 0){
+            return True;
+        }
+        return false;
     }
 
     /*
@@ -113,17 +140,10 @@ class HomeController extends Controller
     	$id_boleto = Input::get("tk");
 
         //Verificamos que el juego exista
-    	$juegos = json_decode(file_get_contents(SAJU));
 		$juego = HomeController::getJuego($id_juego);    	
 
     	if(!isset($juego)){
-    		$juegodisp = HomeController::getJuegoDisponible();
-    		if(!isset($juegodisp)){
-    			return view('welcome')->with("juegos",$juegos->data)->with("juego",$juegodisp)
-    		    				      ->with("error","El juego seleccionado no esta disponible");
-    		}
-    		return view("welcome")->with("juegos",$juegos->data)
-    							  ->with("error","El juego seleccionado no esta disponible");
+    		return HomeController::returnMessage("El juego seleccionado no esta disponible");
     	}
 
         //Verificamos que el horario exista
@@ -131,79 +151,42 @@ class HomeController extends Controller
     	$horario = HomeController::getHorario($juego,$id_hora);
 
     	if(!isset($horario)){
-    		$juegodisp = HomeController::getJuegoDisponible();
-    		if(!isset($juegodisp)){
-    			return view('welcome')->with("juegos",$juegos->data)->with("juego",$juegodisp)
-    		    						  ->with("error","El horario seleccionado no esta disponible");
-    		}
-    		return view("welcome")->with("juegos",$juegos->data)
-    							  ->with("error","El horario seleccionado no esta disponible");
+            return HomeController::returnMessage("El horario seleccionado no esta disponible");
     	}
 
 
-        //Verificamos que el horario se de hoy
-    	$today = new DateTime();
-    	$date    = new DateTime($horario->datetime);
-    	$diff = $today->setTime(0,0,0)->diff( $date->setTime(0,0,0) );
-		$diffDays = (integer)$diff->format( "%R%a" );
-		if($diffDays != 0){
-			$juegodisp = HomeController::getJuegoDisponible();
-			if(!isset($juegodisp)){
-				return view('welcome')->with("juegos",$juegos->data)->with("juego",$juegodisp)
-    		    						  ->with("error","El horario seleccionado no esta disponible");
-			}
-			return view("welcome")->with("juegos",$juegos->data)
-    							  ->with("error","El horario seleccionado no esta disponible");
+        //Verificamos que el horario sea de hoy
+		if(HomeController::isToday($horario->datetime)){
+            return HomeController::returnMessage("El horario seleccionado no es del día de hoy");
     	}
 
         //Verificamos que el hora no haya pasado
     	if( time() > ( (int)date("U",strtotime($horario->datetime)) - 540) ){
-			$juegodisp = HomeController::getJuegoDisponible();
-			if(!isset($juegodisp)){
-				return view('welcome')->with("juegos",$juegos->data)->with("juego",$juegodisp)
-    		    				      ->with("error","La hora ya paso o es muy cercana");
-			}
-			return view("welcome")->with("juegos",$juegos->data)
-    							  ->with("error","La hora ya paso o es muy cercana");
+            return HomeController::returnMessage("La hora ya paso o es muy cercana");
     	}
 
         //Verificamos que la persona exista
 		$persona =  HomeController::getPersona($id_boleto);	
 
     	if(!isset($persona)){
-			$juegodisp = HomeController::getJuegoDisponible();
-			if(!isset($juegodisp)){
-				return view('welcome')->with("juegos",$juegos->data)->with("juego",$juegodisp)
-    		    						  ->with("error","El boleto no existe");
-			}
-			return view("welcome")->with("juegos",$juegos->data)
-    							  ->with("error","El boleto no existe");
+            return HomeController::returnMessage("El boleto ingresado no existe");
     	}
 
-        //Verificamos que el boleto sea para
-    	$date    = new DateTime($persona->fecha);
-    	$diff = $today->setTime(0,0,0)->diff( $date->setTime(0,0,0) );
-		$diffDays = (integer)$diff->format( "%R%a" );
-    	if($diffDays != 0 && false){ //DESACTIVADO PARA PRUEBAS
-    		$juegodisp = HomeController::getJuegoDisponible();
-			if(!isset($juegodisp)){
-				return view('welcome')->with("juegos",$juegos->data)->with("juego",$juegodisp)
-    		    						  ->with("error","El boleto no tiene vigencia");
-			}
-			return view("welcome")->with("juegos",$juegos->data)
-    							  ->with("error","El boleto no tiene vigencia");
+    	if(HomeController::isToday($persona->fecha) && false){ //DESACTIVADO PARA PRUEBAS
+            return HomeController::returnMessage("El boleto ya no tiene vigencia");
     	}
 
-        //Verifico si ya tiene reservación
+        //Verifico si ya tiene reservación, si ya es pasada le quito el active
     	$hasbooks = Booking::where('id_boleto',$id_boleto)->where('active',"1")->get()->first();
         if(isset($hasbooks)){
-        	$juegodisp = HomeController::getJuegoDisponible();
-			if(!isset($juegodisp)){
-				return view('welcome')->with("juegos",$juegos->data)->with("juego",$juegodisp)
-    		    						  ->with("error","Usted ya tiene una reservación activa");
-			}
-			return view("welcome")->with("juegos",$juegos->data)
-    							  ->with("error","Usted ya tiene una reservación activa");
+            $newhorario = HomeController::getHorario(HomeController::getJuego($hasbooks->id_juego),
+                                                        $hasbooks->id_hora);
+            if (time() > ( (int)date("U",strtotime($newhorario->datetime))) ) { //Ya paso
+                $hasbooks->active = 0;
+                $hasbooks->save();
+            }else{
+                return HomeController::returnMessage("Usted ya tiene una reservación activa");
+            }
         }
 
         // Checo si la persona no compro el boleto, y quien se lo compro

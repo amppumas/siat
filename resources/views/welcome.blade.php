@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    @if(isset($error))
+    @if(isset($error) && $error != '')
         <div class="alert alert-dismissible alert-danger">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <strong>Lo sentimos :c </strong> {{ $error }}
@@ -56,7 +56,7 @@
     var id_juego = 9999;
     var id_hora = 0;
     $( document ).ready(function() {
-        $.get('/juegos', { id: "@if(isset($juego)){{$juego->id}}@endif"}, function(data) {
+        $.get('/juegos', { id: "@if(isset($juegodisponible)){{ $juegodisponible->id}}@endif"}, function(data) {
             $("#juegoinfo").replaceWith(data);
         });
     });
