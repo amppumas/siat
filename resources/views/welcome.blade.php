@@ -56,7 +56,7 @@
     var id_juego = 9999;
     var id_hora = 0;
     $( document ).ready(function() {
-        $.get('/juegos', { id: "@if(isset($juegodisponible)){{ $juegodisponible->id}}@endif"}, function(data) {
+        $.get('/juegos', { id: "@if(isset($juegodisp)){{ $juegodisp->id}}@endif"}, function(data) {
             $("#juegoinfo").replaceWith(data);
         });
     });
