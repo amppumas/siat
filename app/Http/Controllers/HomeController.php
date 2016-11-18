@@ -107,8 +107,7 @@ class HomeController extends Controller
     {
         $juegos = json_decode(file_get_contents(SAJU));
         $juegodisp = HomeController::getJuegoDisponible();
-
-        if(!isset($juegodisp)){
+        if(isset($juegodisp)){
             return view('welcome')->with("juegos",$juegos->data)->with("juegodisp",$juegodisp)
                                   ->with("error",$errormsg);
         }

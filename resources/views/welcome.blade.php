@@ -55,11 +55,13 @@
 <script type="text/javascript">
     var id_juego = 9999;
     var id_hora = 0;
+    @if(isset($juegodisp))
     $( document ).ready(function() {
-        $.get('/juegos', { id: "@if(isset($juegodisp)){{ $juegodisp->id}}@endif"}, function(data) {
+        $.get('/juegos', { id: "{{ $juegodisp->id}}"}, function(data) {
             $("#juegoinfo").replaceWith(data);
         });
     });
+    @endif
     $( ".celljuego" ).click(function() {
         $( ".celljuego" ).removeClass('selected');
         jQuery(this).addClass('selected');
