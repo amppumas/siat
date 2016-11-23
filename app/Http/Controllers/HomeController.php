@@ -171,7 +171,11 @@ class HomeController extends Controller
             return HomeController::returnMessage("El boleto ingresado no existe");
     	}
 
-    	if(HomeController::isToday($persona->fecha) && false){ //DESACTIVADO PARA PRUEBAS
+        if((int)$persona->edad < (int)$juego->agelimit){
+            return HomeController::returnMessage("No tiene la edad minima para entrar al juego");
+        }
+
+    	if(HomeController::isToday($persona->fecha) && true){ //DESACTIVADO PARA PRUEBAS
             return HomeController::returnMessage("El boleto ya no tiene vigencia");
     	}
 
