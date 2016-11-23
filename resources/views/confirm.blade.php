@@ -47,7 +47,7 @@ $horareserva = new DateTime($horario->datetime);
 					<span>Hoy a las {{ $horareserva->format('g:i A') }}</span>
 				</p>
 			</div>
-			<img src="http://api.qrserver.com/v1/create-qr-code/?data={{$booking}}size=100x100" alt="QR" title="Su reservación">
+			<img src="http://api.qrserver.com/v1/create-qr-code/?data={{$booking}}&amp;size=100x100" alt="QR" title="Su reservación">
 			<br>
 			<a href="/" class="btn btn-success btn-lg">Regresar</a>
 			<a href="#imprimir" onClick="window.print();" class="btn btn-info btn-lg">Imprimir</a>
